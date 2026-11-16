@@ -1,0 +1,608 @@
+/* ==========================================================================
+   PASSO 3: CONFIGURAÇÃO INICIAL (:root, CSS Reset e Body)
+   ========================================================================== */
+
+/* O :root guarda as variáveis globais. Alterar aqui muda as cores em todo o site! */
+:root {
+    /* Cores gerais da interface */
+    --black: #0b0b0f;
+    --panel: #16161d;
+    --red:   #e10600;
+    --white: #f5f5f7;
+    --muted: #888898;
+    --line:  #262630;
+
+    /* PASSO 8: Cores específicas de cada equipe de F1 */
+    --ferrari:  #e10600;
+    --mclaren:  #ff8000;
+    --mercedes: #00d2be;
+    --audi:     #cccccc;
+
+    /* Variável padrão para a equipe ativa */
+    --team: var(--red);
+
+    /* PASSO 2: Fonte importada do Google Fonts */
+    --font: 'Titillium Web', 'Segoe UI', sans-serif;
+}
+
+/* Reset Global: Zera margens e espaçamentos padrão de todos os navegadores.
+   box-sizing: border-box faz com que paddings e bordas NÃO aumentem o tamanho final dos elementos. */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo geral da página */
+body {
+    font-family: var(--font);
+    background-color: var(--black);
+    color: var(--white);
+    line-height: 1.5;
+}
+
+/* Classe utilitária para centralizar o conteúdo principal nas telas grandes */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* ==========================================================================
+   PASSO 4: BARRA DO TOPO (.topbar) - FLEXBOX
+   ========================================================================== */
+
+.topbar {
+    display: flex;
+    justify-content: space-between; /* Separa em 3 partes: Logo à esq, Menu centro, Botão à dir */
+    align-items: center;            /* Alinha todos verticalmente ao centro */
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--line);
+    background-color: var(--black);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--red);
+}
+
+.menu {
+    display: flex;
+    gap: 32px; /* Espaço uniforme entre os links do menu */
+}
+
+.menu a {
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+/* Transição de cor ao passar o mouse */
+.menu a:hover {
+    color: var(--white);
+}
+
+
+/* Estilos dos Botões reutilizáveis */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.2); /* Deixa o botão sutilmente mais claro no hover */
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+.btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-align: center;
+}
+
+.btn-outline:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+
+/* ==========================================================================
+   PASSO 5 & 6: HERO (Banner Principal com Degradê e Imagem de Fundo)
+   ========================================================================== */
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 60px 40px;
+    min-height: 480px;
+
+    /* PASSO 5 e 6: Duas camadas de fundo sobrepostas!
+       Camada 1 (superior): Linear-gradient com "corte seco" na porcentagem 62%->64%
+       Camada 2 (inferior): Imagem piloto.jpg puxada da pasta /img */
+    background: 
+        linear-gradient(110deg,
+            var(--black) 0%, 
+            var(--black) 62%,
+            var(--red) 62%, 
+            var(--red) 64%,
+            rgba(11, 11, 15, 0.45) 64%
+        ),
+        url("img/piloto.jpg") right center / cover no-repeat;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.subtitle {
+    color: var(--red);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    font-size: 4.8rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.95;
+    margin: 15px 0 20px 0;
+}
+
+/* Faz a segunda parte do título ("SÃO PAULO") ir para a linha de baixo */
+.hero h1 span {
+    display: block;
+    color: var(--red);
+}
+
+.description {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* Caixas de números/estatísticas do autódromo */
+.track-info {
+    display: flex;
+    gap: 30px;
+}
+
+.info {
+    border-left: 2px solid var(--red);
+    padding-left: 15px;
+}
+
+.info .number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1;
+}
+
+.info .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   PASSO 7: A ZEBRA DA PISTA (.kerb)
+   ========================================================================== */
+
+.kerb {
+    height: 12px;
+    /* Degradê linear que se repete: 0 a 40px vermelho, 40 a 80px branco */
+    background: repeating-linear-gradient(90deg,
+        var(--red) 0, 
+        var(--red) 40px,
+        var(--white) 40px, 
+        var(--white) 80px
+    );
+}
+
+
+/* ==========================================================================
+   ESTILOS GERAIS DE SEÇÃO
+   ========================================================================== */
+
+.section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.section-title span {
+    color: var(--red);
+    margin-right: 8px;
+}
+
+
+/* ==========================================================================
+   PASSO 8: GRID DE PILOTOS (Grid auto-fit)
+   ========================================================================== */
+
+.drivers {
+    display: grid;
+    /* auto-fit preenche o espaço e minmax força largura mínima de 220px por card */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* Atribuição de variáveis de cores locais por classe de equipe */
+.team-ferrari  { --team: var(--ferrari); }
+.team-mclaren  { --team: var(--mclaren); }
+.team-mercedes { --team: var(--mercedes); }
+.team-audi     { --team: var(--audi); }
+
+.driver-card {
+    background-color: var(--panel);
+    padding: 30px 20px;
+    position: relative;
+    border-top: 5px solid var(--team); /* Usa a cor dinâmica da equipe */
+    transition: transform 0.2s ease;
+}
+
+/* Efeito de elevação suave no hover */
+.driver-card:hover {
+    transform: translateY(-6px);
+}
+
+.car-number {
+    font-size: 4.5rem;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--team);
+    opacity: 0.35; /* Efeito apagado/marca d'água solicitado */
+    line-height: 1;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.driver-card h3 {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.driver-card h3 strong {
+    font-weight: 900;
+}
+
+.team-name {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+
+/* ==========================================================================
+   PASSO 9: CLASSIFICAÇÃO (Filtros e Tabela HTML)
+   ========================================================================== */
+
+/* Filtros */
+.filters {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    margin-bottom: 25px;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.filter-group input, 
+.filter-group select {
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--white);
+    padding: 12px;
+    font-family: var(--font);
+    outline: none;
+}
+
+.btn-filter {
+    height: 45px;
+    padding: 0 30px;
+}
+
+/* Tabela Estilizada */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Permite rolar na horizontal caso a tela seja menor que a tabela */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove o espaçamento padrão entre células */
+    background-color: var(--panel);
+    text-align: left;
+}
+
+th {
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+}
+
+td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+}
+
+/* Ilumina a linha da tabela ao passar o mouse */
+tbody tr:hover {
+    background-color: #1e1e28;
+}
+
+/* Efeito da linha do Líder da competição */
+.leader {
+    background-color: rgba(225, 6, 0, 0.12);
+}
+
+.pos {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    background-color: var(--white);
+    color: var(--black);
+    font-weight: 900;
+}
+
+.leader .pos {
+    background-color: var(--red);
+    color: var(--white);
+}
+
+/* Barrinha colorida da equipe na tabela */
+.bar {
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background-color: var(--team);
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+
+/* ==========================================================================
+   PASSO 10: INGRESSOS E FORMULÁRIO (Form-Grid)
+   ========================================================================== */
+
+/* Layout de 2 colunas: Texto à esquerda, Formulário à direita */
+.tickets {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+}
+
+.tickets-subtitle {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.alert-box {
+    background-color: #2a2400;
+    border-left: 4px solid #ffcc00;
+    color: #ffcc00;
+    padding: 15px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+.price {
+    color: var(--red);
+}
+
+/* Estrutura Interna do Formulário em Grid */
+.ticket-form {
+    background-color: var(--panel);
+    padding: 30px;
+    border-top: 4px solid var(--red);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colunas de campos */
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Classe para fazer um campo ocupar as 2 colunas inteiras do form-grid */
+.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: #0d0d12;
+    border: 1px solid var(--line);
+    color: var(--white);
+    padding: 12px;
+    font-family: var(--font);
+    outline: none;
+}
+
+/* Destaque visual quando o usuário clica para digitar no campo */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--red);
+}
+
+.form-group small {
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+
+/* ==========================================================================
+   PASSO 11: RESPONSIVIDADE COM @MEDIA (Adaptação para Celular)
+   ========================================================================== */
+
+/* Quando a tela for menor ou igual a 768px (tablets e celulares) */
+@media (max-width: 768px) {
+    
+    /* Esconde o menu principal de navegação */
+    .menu {
+        display: none;
+    }
+
+    .topbar {
+        padding: 15px 20px;
+    }
+
+    /* O Hero passa a ficar verticalizado em uma única coluna */
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 20px;
+        background: var(--black); /* Remove a faixa inclinada e a imagem grande no celular */
+    }
+
+    .hero h1 {
+        font-size: 3.2rem;
+    }
+
+    .track-info {
+        margin-top: 30px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Reduz o grid de pilotos para 2 colunas em telas pequenas */
+    .drivers {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Empilha os campos de filtros verticalmente */
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Faz com que a tabela não quebre linhas de texto ao rolar pro lado */
+    table {
+        min-width: 600px;
+    }
+
+    td, th {
+        white-space: nowrap;
+    }
+
+    /* A seção de ingressos e o form-grid viram 1 coluna só */
+    .tickets, 
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================================================
+   RODAPÉ (.footer)
+   ========================================================================== */
+
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: var(--black);
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+}
+
+.footer span {
+    color: var(--red);
+    font-weight: 700;
+}

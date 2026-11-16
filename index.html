@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- define a codificação de caracteres para aceitar acentos e ç -->
+    <meta charset="UTF-8">
+    <!-- garante que a página se adapte à largura da tela do celular (responsividade) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pit Wall - GP de São Paulo</title>
+
+    <!-- PASSO 2: Importação da fonte 'Titillium Web' do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vinculação do arquivo de estilos CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- CAIXA 1: Header / Barra de Topo -->
+    <header class="topbar">
+        <!-- Logo do site. O <span> permite colorir só a palavra WALL de vermelho -->
+        <div class="logo">PIT<span>WALL</span></div>
+        
+        <!-- Menu de navegação principal (usará Flexbox) -->
+        <nav class="menu">
+            <a href="#pilotos">Pilotos</a>
+            <a href="#classificacao">Classificação</a>
+            <a href="#ingressos">Ingressos</a>
+        </nav>
+        
+        <!-- Botão de chamada para ação no topo -->
+        <a href="#ingressos" class="btn-primary btn-sm">Comprar Ingresso</a>
+    </header>
+
+    <!-- CAIXA 2: Seção Hero (Banner Principal do GP) -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="subtitle">Autódromo de Interlagos · Novembro de 2026</span>
+            
+            <!-- Título principal. O <span> força a quebra de linha de "São Paulo" com display: block -->
+            <h1>GP DE <span>SÃO PAULO</span></h1>
+            
+            <p class="description">
+                71 voltas, 22 carros no grid e a torcida brasileira empurrando o Bortoleto na reta.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="#ingressos" class="btn-primary">Garantir Meu Lugar</a>
+                <a href="#classificacao" class="btn-outline">Ver Classificação</a>
+            </div>
+        </div>
+
+        <!-- Bloco de dados/estatísticas do autódromo (usará Flexbox) -->
+        <div class="track-info">
+            <div class="info">
+                <span class="number">71</span>
+                <span class="label">Voltas</span>
+            </div>
+            <div class="info">
+                <span class="number">4.309</span>
+                <span class="label">KM por Volta</span>
+            </div>
+            <div class="info">
+                <span class="number">15</span>
+                <span class="label">Curvas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Elemento separador visual: A Zebra da pista criada inteiramente via CSS -->
+    <div class="kerb"></div>
+
+    <!-- Container principal que agrupa as seções 3, 4 e 5 para centralizar o conteúdo -->
+    <main class="container">
+
+        <!-- CAIXA 3: Grid de Pilotos -->
+        <section id="pilotos" class="section">
+            <h2 class="section-title"><span>01</span> GRID DE PILOTOS</h2>
+            
+            <!-- Div container dos cards que usará 'grid auto-fit' -->
+            <div class="drivers">
+                
+                <!-- Card 1: Ferrari (usa classe específica para a cor da equipe via variável CSS) -->
+                <div class="driver-card team-ferrari">
+                    <span class="car-number">16</span>
+                    <h3>CHARLES <strong>LECLERC</strong></h3>
+                    <p class="team-name">Ferrari</p>
+                </div>
+
+                <!-- Card 2: McLaren -->
+                <div class="driver-card team-mclaren">
+                    <span class="car-number">81</span>
+                    <h3>OSCAR <strong>PIASTRI</strong></h3>
+                    <p class="team-name">McLaren</p>
+                </div>
+
+                <!-- Card 3: Mercedes -->
+                <div class="driver-card team-mercedes">
+                    <span class="car-number">63</span>
+                    <h3>GEORGE <strong>RUSSELL</strong></h3>
+                    <p class="team-name">Mercedes</p>
+                </div>
+
+                <!-- Card 4: Audi -->
+                <div class="driver-card team-audi">
+                    <span class="car-number">5</span>
+                    <h3>GABRIEL <strong>BORTOLETO</strong></h3>
+                    <p class="team-name">Audi</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CAIXA 4: Classificação (Filtros + Tabela) -->
+        <section id="classificacao" class="section">
+            <h2 class="section-title"><span>02</span> CLASSIFICAÇÃO</h2>
+
+            <!-- Formulário/Barra de Filtros (usará Flexbox) -->
+            <div class="filters">
+                <div class="filter-group flex-1">
+                    <label for="buscar">BUSCAR PILOTO</label>
+                    <input type="text" id="buscar" placeholder="Nome ou equipe...">
+                </div>
+                
+                <div class="filter-group flex-1">
+                    <label for="equipe">EQUIPE</label>
+                    <select id="equipe">
+                        <option value="">Todas as equipes</option>
+                        <option value="ferrari">Ferrari</option>
+                        <option value="mclaren">McLaren</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="btn-outline btn-filter">FILTRAR</button>
+            </div>
+
+            <!-- Tabela de Classificação estruturada com <thead> e <tbody> -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>POS.</th>
+                            <th>PILOTO</th>
+                            <th>EQUIPE</th>
+                            <th>VITÓRIAS</th>
+                            <th>DIFERENÇA</th>
+                            <th>PONTOS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linha do Líder (ganha a classe especial 'leader') -->
+                        <tr class="leader team-mclaren">
+                            <td><span class="pos">1</span></td>
+                            <td><span class="bar"></span> Oscar Piastri</td>
+                            <td>McLaren</td>
+                            <td>6</td>
+                            <td>LÍDER</td>
+                            <td><strong>366</strong></td>
+                        </tr>
+                        <tr class="team-ferrari">
+                            <td><span class="pos">2</span></td>
+                            <td><span class="bar"></span> Charles Leclerc</td>
+                            <td>Ferrari</td>
+                            <td>5</td>
+                            <td>-18</td>
+                            <td><strong>348</strong></td>
+                        </tr>
+                        <tr class="team-mercedes">
+                            <td><span class="pos">3</span></td>
+                            <td><span class="bar"></span> George Russell</td>
+                            <td>Mercedes</td>
+                            <td>4</td>
+                            <td>-41</td>
+                            <td><strong>325</strong></td>
+                        </tr>
+                        <tr class="team-audi">
+                            <td><span class="pos">4</span></td>
+                            <td><span class="bar"></span> Gabriel Bortoleto</td>
+                            <td>Audi</td>
+                            <td>0</td>
+                            <td>-298</td>
+                            <td><strong>68</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CAIXA 5: Ingressos (Texto | Formulário em Grid) -->
+        <section id="ingressos" class="section tickets">
+            
+            <!-- Coluna da esquerda: Informações dos Setores -->
+            <div class="tickets-info">
+                <h2 class="section-title"><span>03</span> INGRESSOS</h2>
+                <p class="tickets-subtitle">Escolha o setor e venha ver a decisão do título de perto.</p>
+                
+                <div class="alert-box">
+                    Últimos 120 lugares no Setor da Reta!
+                </div>
+
+                <div class="price-list">
+                    <div class="price-item">
+                        <span>Arquibancada A</span>
+                        <strong class="price">R$ 480</strong>
+                    </div>
+                    <div class="price-item">
+                        <span>Setor da Reta</span>
+                        <strong class="price">R$ 890</strong>
+                    </div>
+                    <div class="price-item">
+                        <span>Box VIP</span>
+                        <strong class="price">R$ 2.400</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna da direita: Formulário de Inscrição (Form-Grid) -->
+            <form action="#" class="ticket-form" onsubmit="return false;">
+                <div class="form-grid">
+                    
+                    <div class="form-group">
+                        <label for="nome">NOME COMPLETO</label>
+                        <input type="text" id="nome" placeholder="Como está no documento" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-MAIL</label>
+                        <input type="email" id="email" placeholder="voce@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="setor">SETOR</label>
+                        <select id="setor" required>
+                            <option value="">Escolha o setor</option>
+                            <option value="a">Arquibancada A</option>
+                            <option value="reta">Setor da Reta</option>
+                            <option value="vip">Box VIP</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dia">DIA</label>
+                        <input type="date" id="dia" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qtd">INGRESSOS</label>
+                        <input type="number" id="qtd" value="2" min="1" max="6">
+                        <small>Até 6 por pessoa.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="perfil">SEU PERFIL (OPCIONAL)</label>
+                        <input type="url" id="perfil" placeholder="https://instagram.com/...">
+                    </div>
+
+                    <!-- Campo com classe 'full' para ocupar a largura inteira (2 colunas) -->
+                    <div class="form-group full">
+                        <label for="foto">FOTO DA TORCIDA PARA O TELÃO</label>
+                        <input type="file" id="foto" accept="image/*">
+                        <small>JPG ou PNG · a melhor foto aparece no telão da reta!</small>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="recado">RECADO PARA O SEU PILOTO</label>
+                        <textarea id="recado" rows="4" placeholder="Vai, Bortoleto! Interlagos é sua casa..."></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <button type="submit" class="btn-primary btn-block">RESERVAR INGRESSOS</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- CAIXA 6: Rodapé OBRIGATÓRIO -->
+    <footer class="footer">
+        <p>PIT<span>WALL</span> · Projeto de estudo de HTML e CSS · Feito por <strong>SEU NOME COMPLETO HERE</strong></p>
+    </footer>
+
+</body>
+</html>
